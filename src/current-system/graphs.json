@@ -1,0 +1,209 @@
+{
+  "nodes": [
+    {
+      "name": "inputAnalysisNode",
+      "stateType": "ResearchGraphState",
+      "model": "gpt-4",
+      "temperature": 0.3
+    },
+    {
+      "name": "concurrentInputAnalysisNode",
+      "stateType": "ConcurrentResearchGraphState",
+      "model": "gpt-4",
+      "temperature": 0.3
+    },
+    {
+      "name": "noveltyAnalysisNode",
+      "stateType": "ResearchGraphState",
+      "model": "gpt-4",
+      "temperature": 0.2
+    },
+    {
+      "name": "concurrentNoveltyAnalysisNode",
+      "stateType": "ConcurrentResearchGraphState",
+      "model": "gpt-4",
+      "temperature": 0.2
+    },
+    {
+      "name": "feasibilityAnalysisNode",
+      "stateType": "ResearchGraphState",
+      "model": "gpt-4",
+      "temperature": 0.2
+    },
+    {
+      "name": "concurrentFeasibilityAnalysisNode",
+      "stateType": "ConcurrentResearchGraphState",
+      "model": "gpt-4",
+      "temperature": 0.2
+    },
+    {
+      "name": "impactAnalysisNode",
+      "stateType": "ResearchGraphState",
+      "model": "gpt-4",
+      "temperature": 0.3
+    },
+    {
+      "name": "concurrentImpactAnalysisNode",
+      "stateType": "ConcurrentResearchGraphState",
+      "model": "gpt-4",
+      "temperature": 0.3
+    },
+    {
+      "name": "synthesisNode",
+      "stateType": "ResearchGraphState"
+    },
+    {
+      "name": "concurrentSynthesisNode",
+      "stateType": "ConcurrentResearchGraphState"
+    },
+    {
+      "name": "awaitApprovalNode",
+      "stateType": "ResearchGraphState"
+    },
+    {
+      "name": "concurrentAwaitApprovalNode",
+      "stateType": "ConcurrentResearchGraphState"
+    },
+    {
+      "name": "marketResearchNode",
+      "stateType": "MonetizationGraphState",
+      "model": "gpt-4",
+      "temperature": 0.3
+    },
+    {
+      "name": "businessModelNode",
+      "stateType": "MonetizationGraphState",
+      "model": "gpt-4",
+      "temperature": 0.2
+    },
+    {
+      "name": "pricingStrategyNode",
+      "stateType": "MonetizationGraphState",
+      "model": "gpt-4",
+      "temperature": 0.2
+    },
+    {
+      "name": "awaitStrategyApprovalNode",
+      "stateType": "MonetizationGraphState"
+    },
+    {
+      "name": "implementationPlanNode",
+      "stateType": "MonetizationGraphState",
+      "model": "gpt-4",
+      "temperature": 0.2
+    }
+  ],
+  "graphs": [
+    {
+      "name": "researchGraph",
+      "annotationType": "ResearchGraphAnnotation",
+      "nodes": [
+        "inputAnalysisNode",
+        "noveltyAnalysisNode",
+        "feasibilityAnalysisNode",
+        "impactAnalysisNode",
+        "synthesisNode",
+        "awaitApprovalNode"
+      ],
+      "edges": [
+        { "start": "__start__", "end": "inputAnalysisNode" },
+        { "start": "inputAnalysisNode", "end": "noveltyAnalysisNode" },
+        { "start": "noveltyAnalysisNode", "end": "feasibilityAnalysisNode" },
+        { "start": "feasibilityAnalysisNode", "end": "impactAnalysisNode" },
+        { "start": "impactAnalysisNode", "end": "synthesisNode" },
+        { "start": "synthesisNode", "end": "awaitApprovalNode" },
+        { "start": "awaitApprovalNode", "end": "__end__" }
+      ],
+      "selectionWords": ["research","analysis","data","source","methodology","results","hypothesis","findings","experiment","conclusion"]
+    },
+    {
+      "name": "monetizationGraph",
+      "annotationType": "MonetizationGraphAnnotation",
+      "nodes": [
+        "marketResearchNode",
+        "businessModelNode",
+        "pricingStrategyNode",
+        "awaitStrategyApprovalNode",
+        "implementationPlanNode"
+      ],
+      "edges": [
+        { "start": "__start__", "end": "marketResearchNode" },
+        { "start": "marketResearchNode", "end": "businessModelNode" },
+        { "start": "businessModelNode", "end": "pricingStrategyNode" },
+        { "start": "pricingStrategyNode", "end": "awaitStrategyApprovalNode" },
+        { "start": "awaitStrategyApprovalNode", "end": "implementationPlanNode" },
+        { "start": "implementationPlanNode", "end": "__end__" }
+      ],
+      "selectionWords": [
+        "@monetize", 
+        "revenue","business","model","profit","market","strategy","customers","pricing","growth"
+      ]
+    },
+    {
+      "name": "concurrentResearchGraph",
+      "annotationType": "ConcurrentResearchGraphAnnotation",
+      "nodes": [
+        "concurrentInputAnalysisNode",
+        "concurrentNoveltyAnalysisNode",
+        "concurrentFeasibilityAnalysisNode",
+        "concurrentImpactAnalysisNode",
+        "concurrentSynthesisNode",
+        "concurrentAwaitApprovalNode"
+      ],
+      "edges": [
+        { "start": "__start__", "end": "concurrentInputAnalysisNode" },
+        { "start": "concurrentInputAnalysisNode", "end": "concurrentNoveltyAnalysisNode" },
+        { "start": "concurrentInputAnalysisNode", "end": "concurrentFeasibilityAnalysisNode" },
+        { "start": "concurrentInputAnalysisNode", "end": "concurrentImpactAnalysisNode" },
+        { "start": "concurrentNoveltyAnalysisNode", "end": "concurrentSynthesisNode" },
+        { "start": "concurrentFeasibilityAnalysisNode", "end": "concurrentSynthesisNode" },
+        { "start": "concurrentImpactAnalysisNode", "end": "concurrentSynthesisNode" },
+        { "start": "concurrentSynthesisNode", "end": "concurrentAwaitApprovalNode" },
+        { "start": "concurrentAwaitApprovalNode", "end": "__end__" }
+      ],
+      "selectionWords": [
+        "@test-concurrent"
+      ]
+    },
+    {
+      "name": "unknownGraph",
+      "annotationType": "DefaultGraphAnnotation",
+      "nodes": [
+        "inputAnalysisNode",
+        "noveltyAnalysisNode",
+        "feasibilityAnalysisNode",
+        "impactAnalysisNode",
+        "synthesisNode",
+        "awaitApprovalNode"
+      ],
+      "edges": [
+        { "start": "__start__", "end": "inputAnalysisNode" },
+        { "start": "inputAnalysisNode", "end": "noveltyAnalysisNode" },
+        { "start": "noveltyAnalysisNode", "end": "feasibilityAnalysisNode" },
+        { "start": "feasibilityAnalysisNode", "end": "impactAnalysisNode" },
+        { "start": "impactAnalysisNode", "end": "synthesisNode" },
+        { "start": "synthesisNode", "end": "awaitApprovalNode" },
+        { "start": "awaitApprovalNode", "end": "__end__" }
+      ],
+      "selectionWords": [
+        "@unknown"
+      ]
+    },
+    {
+      "name": "shortGraph",
+      "annotationType": "DefaultGraphAnnotation",
+      "nodes": [
+        "inputAnalysisNode",
+        "awaitApprovalNode"
+      ],
+      "edges": [
+        { "start": "__start__", "end": "inputAnalysisNode" },
+        { "start": "inputAnalysisNode", "end": "awaitApprovalNode" },
+        { "start": "awaitApprovalNode", "end": "__end__" }
+      ],
+      "selectionWords": [
+        "@short"
+      ]
+    }
+  ]
+}

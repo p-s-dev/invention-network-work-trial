@@ -1,0 +1,7 @@
+{
+  "fiveMinutes": 300000,
+  "pointsForThread": 1,
+  "pointsForRecent": 5,
+  "pointsForWordMatch": 1,
+  "pointsForKeyWordMatch": 10
+}
